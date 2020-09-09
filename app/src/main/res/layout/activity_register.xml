@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_01"
+    tools:context=".activity.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="146dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        app:srcCompat="@drawable/man_01" />
+
+    <TextView
+        android:id="@+id/registeration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="196dp"
+        android:text="REGISTERATION"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#ffffff"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/registeration"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="271dp"
+        android:background="#660000"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/nameview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/name"
+        android:layout_alignLeft="@id/name"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="251dp"
+        android:text="Name"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+
+    <EditText
+        android:id="@+id/aadhaarNumber"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/aadharView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginBottom="373dp"
+        android:background="#660000"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/aadharView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="337dp"
+        android:text="Aadhar Number"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/mobileNumber"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/mobileView"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="305dp"
+        android:background="#660000"
+        android:ems="10"
+        android:inputType="phone"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/mobileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aadhaarNumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="436dp"
+        android:text="Mobile Number"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/locationView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="542dp"
+        android:background="#660000"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/locationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobileNumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="523dp"
+        android:text="Location"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/passwordView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="636dp"
+        android:background="#660000"
+        android:ems="10"
+        android:inputType="textVisiblePassword"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/passwordView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/location"
+        android:layout_alignStart="@id/password"
+        android:layout_alignLeft="@id/password"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="613dp"
+        android:layout_marginEnd="2dp"
+        android:text="Password"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:background="@drawable/button_modifications"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="90dp"
+        android:text="Register" />
+
+
+</RelativeLayout>

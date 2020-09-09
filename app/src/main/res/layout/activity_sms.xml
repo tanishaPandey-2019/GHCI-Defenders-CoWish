@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_01"
+    tools:context=".activity.sms">
+
+
+    <TextView
+        android:id="@+id/titlesms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="SMS Wishes"
+        android:textColor="#ffffff"
+        android:textSize="50sp"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <ListView
+        android:id="@+id/smsList"
+        android:layout_width="351dp"
+        android:layout_height="540dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="171dp" />
+
+</RelativeLayout>

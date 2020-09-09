@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1051021037894",
+    "firebase_url": "https://cowish.firebaseio.com",
+    "project_id": "cowish",
+    "storage_bucket": "cowish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051021037894:android:cfdfe02c119f01672c9547",
+        "android_client_info": {
+          "package_name": "com.ghci20.codeathon.cowish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051021037894-ub719ujiua3sddgtkhj3gilniuon37nu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnGY6kIyQqljEpPZLhLsu5Y5warxSK_LI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051021037894-ub719ujiua3sddgtkhj3gilniuon37nu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
