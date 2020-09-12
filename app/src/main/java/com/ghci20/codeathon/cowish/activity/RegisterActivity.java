@@ -13,6 +13,8 @@ import com.ghci20.codeathon.cowish.userlogin.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
+
 public class RegisterActivity extends AppCompatActivity {
     UserInfo myuser;
     EditText name;
@@ -55,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void saveUserInFirebase(UserInfo user) {
         try {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference userRef = database.getReference("Users");
+            DatabaseReference userRef = database.getReference(FIREBASE_USERS);
             userRef.push().setValue(user);
             Log.i(TAG, "User inserted in Firebase successfully");
 

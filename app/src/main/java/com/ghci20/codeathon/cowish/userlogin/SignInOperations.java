@@ -11,6 +11,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
+
 
 public class SignInOperations {
     private static boolean enteredPasswordCorrect;
@@ -20,7 +22,7 @@ public class SignInOperations {
     public static boolean isPasswordCorrect(final int enteredAadhaarNumber, final String enteredPassword) {
         Log.i(TAG, "enteredAadhaarNumber = " + enteredAadhaarNumber + " enteredPassword = " + enteredPassword);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef =  database.getReference("Users");
+        DatabaseReference userRef =  database.getReference(FIREBASE_USERS);
         final CountDownLatch latch = new CountDownLatch(1);
 //        final SettableApiFuture<DataSnapshot> future = SettableApiFuture.create();
         userRef.getRef().addListenerForSingleValueEvent(
