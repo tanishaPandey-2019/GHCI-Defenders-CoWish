@@ -1,4 +1,4 @@
-package com.ghci20.codeathon.cowish.activity;
+package com.ghci20.codeathon.cowish;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

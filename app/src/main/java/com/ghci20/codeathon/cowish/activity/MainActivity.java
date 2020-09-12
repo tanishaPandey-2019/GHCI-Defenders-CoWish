@@ -3,27 +3,19 @@ package com.ghci20.codeathon.cowish.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ghci20.codeathon.cowish.R;
-import com.ghci20.codeathon.cowish.userlogin.SignInOperations;
-import com.ghci20.codeathon.cowish.userlogin.UserInfo;
+import com.ghci20.codeathon.cowish.Util;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
-import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_AADHAAR_NUMBER;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity" ;
@@ -59,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO : Implement password matching
                 // Currently assuming that whatever username and password is entered is correct
-                saveAadhaarNumberToSharedPref();
+                Util.setAadhaarNumberToSharedPref(getApplicationContext(), loginAadhaar.getText().toString());
+                Util.getWishListFromFirebase(getApplicationContext());
                 openChoiceActivity();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 Log.i(TAG, "database = " + database.toString());
@@ -105,17 +98,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void saveAadhaarNumberToSharedPref() {
-        try {
-            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("default", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(SHARED_PREF_AADHAAR_NUMBER, Integer.parseInt(loginAadhaar.getText().toString()));
-            editor.apply();
-            Log.i(TAG, "Shared pref saved");
-        } catch (Exception e) {
-            Log.e(TAG, "Exception encountered", e);
-        }
-    }
+
 
 
 

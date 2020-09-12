@@ -1,5 +1,7 @@
 package com.ghci20.codeathon.cowish;
 
+import java.util.ArrayList;
+
 public class constants {
 
     // Constants related to firebase
@@ -8,4 +10,5 @@ public class constants {
 
     // Constants related to Shred Preference
     public static final String SHARED_PREF_AADHAAR_NUMBER = "aadhaarNumber";
+    public static final String SHARED_PREF_WISHLIST = "wishlist";
 }
