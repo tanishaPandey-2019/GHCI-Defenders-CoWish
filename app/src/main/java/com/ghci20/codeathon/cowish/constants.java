@@ -10,5 +10,6 @@ public class constants {
 
     // Constants related to Shred Preference
     public static final String SHARED_PREF_AADHAAR_NUMBER = "aadhaarNumber";
-    public static final String SHARED_PREF_WISHLIST = "wishlist";
+    public static final String SHARED_PREF_WISHLIST = "userWishlist";
+    public static final String SHARED_PREF_ALL_WISHLIST = "allWishlist";
 }

@@ -51,9 +51,9 @@ public class AddWishActivity extends AppCompatActivity {
         wish = findViewById(R.id.wish);
 
         wishList = new ArrayList<>();
-        ArrayList<String> wishListFromFirebase = Util.getWishListFromSharedPref(getApplicationContext());
-        if(wishListFromFirebase != null ) {
-            wishList.addAll(wishListFromFirebase);
+        ArrayList<String> userWishListFromFirebase = Util.getUserWishListFromSharedPref(getApplicationContext());
+        if(userWishListFromFirebase != null ) {
+            wishList.addAll(userWishListFromFirebase);
         }
         for (int i = 0; i < 2; i++) {
             stringArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, wishList);

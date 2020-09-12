@@ -18,6 +18,7 @@ import java.util.Set;
 import static android.content.Context.MODE_PRIVATE;
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_WISHES;
 import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_AADHAAR_NUMBER;
+import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_ALL_WISHLIST;
 import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_WISHLIST;
 
 public class Util {
@@ -25,11 +26,11 @@ public class Util {
     private static final String TAG = "Util";
 
     public static void setAadhaarNumberToSharedPref(Context context, String aadhaarNumberEnteredByUser) {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt(SHARED_PREF_AADHAAR_NUMBER, Integer.parseInt(aadhaarNumberEnteredByUser));
-            editor.apply();
-            Log.i(TAG, "Shared pref saved");
+        SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(SHARED_PREF_AADHAAR_NUMBER, Integer.parseInt(aadhaarNumberEnteredByUser));
+        editor.apply();
+        Log.i(TAG, "Shared pref saved");
     }
 
     public static int getAadhaarNumberFromSharedPref(Context context) {
@@ -37,7 +38,7 @@ public class Util {
                 .getInt(SHARED_PREF_AADHAAR_NUMBER, 0);
     }
 
-    private static void setWishListToSharedPref(Context context, ArrayList<String> wishlist) {
+    private static void setUserWishListToSharedPref(Context context, ArrayList<String> wishlist) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> wishSet = new HashSet<String>(wishlist);
@@ -46,16 +47,33 @@ public class Util {
         Log.i(TAG, "Shared pref saved");
     }
 
-    public static ArrayList<String> getWishListFromSharedPref(Context context) {
+    public static ArrayList<String> getUserWishListFromSharedPref(Context context) {
         Set<String> wishSet = context.getSharedPreferences("default", MODE_PRIVATE)
                 .getStringSet(SHARED_PREF_WISHLIST, null);
-        if(wishSet == null) {
+        if (wishSet == null) {
             return null;
         }
         return new ArrayList<String>(wishSet);
     }
 
-    public static void getWishListFromFirebase(final Context context) {
+    private static void setAllWishListToSharedPref(Context context, ArrayList<String> wishlist) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> wishSet = new HashSet<String>(wishlist);
+        editor.putStringSet(SHARED_PREF_ALL_WISHLIST, wishSet);
+        editor.apply();
+    }
+
+    public static ArrayList<String> getAllWishListFromSharedPref(Context context) {
+        Set<String> wishSet = context.getSharedPreferences("default", MODE_PRIVATE)
+                .getStringSet(SHARED_PREF_ALL_WISHLIST, null);
+        if (wishSet == null) {
+            return null;
+        }
+        return new ArrayList<String>(wishSet);
+    }
+
+    public static void getUserWishListUserFromFirebase(final Context context) {
         final int sharedPrefAadhaarNumber = Util.getAadhaarNumberFromSharedPref(context);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
@@ -67,7 +85,7 @@ public class Util {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    setWishListToSharedPref(context, (ArrayList<String>) postSnapshot.child("wishes").getValue());
+                    setUserWishListToSharedPref(context, (ArrayList<String>) postSnapshot.child("wishes").getValue());
                 }
             }
 
@@ -77,10 +95,30 @@ public class Util {
                 Log.e(TAG, "Encountered an error ", error.toException());
             }
         });
+    }
+
+    public static void getAllWishListFromFirebase(final Context context) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
+        wishesRef.getRef().addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ArrayList<String> allWishlistsInFirebase = new ArrayList<>();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            allWishlistsInFirebase.add(postSnapshot.child("wishes").getValue().toString());
+                        }
+                        setAllWishListToSharedPref(context, allWishlistsInFirebase);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.e(TAG, "Encountered an error ", error.toException());
+                    }
+                });
 
     }
 
-    public static String addWishAgainstParticularAadhaar(int aadhaarNumber) {
-        return "";
-    }
+
 }

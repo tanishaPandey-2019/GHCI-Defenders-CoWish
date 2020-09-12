@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 // TODO : Implement password matching
                 // Currently assuming that whatever username and password is entered is correct
                 Util.setAadhaarNumberToSharedPref(getApplicationContext(), loginAadhaar.getText().toString());
-                Util.getWishListFromFirebase(getApplicationContext());
+                Util.getUserWishListUserFromFirebase(getApplicationContext());
+                Util.getAllWishListFromFirebase(getApplicationContext());
                 openChoiceActivity();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 Log.i(TAG, "database = " + database.toString());

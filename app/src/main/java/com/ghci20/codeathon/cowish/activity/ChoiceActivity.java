@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
 import com.ghci20.codeathon.cowish.R;
-
-import java.util.ArrayList;
 
 public class ChoiceActivity extends AppCompatActivity {
 
@@ -38,12 +33,10 @@ public class ChoiceActivity extends AppCompatActivity {
         grantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opensms();
+//                opensms();
+                openGrantWishActivity();
             }
         });
-
-
-
     }
 
     public void openAddWishActivity(){
@@ -55,5 +48,11 @@ public class ChoiceActivity extends AppCompatActivity {
         Intent intent = new Intent(this, sms.class);
         startActivity(intent);
     }
+
+    public void openGrantWishActivity(){
+        Intent intent = new Intent(this, GrantWishActivity.class);
+        startActivity(intent);
+    }
+
 
 }

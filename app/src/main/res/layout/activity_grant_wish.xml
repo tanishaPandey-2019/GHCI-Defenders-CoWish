@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_01"
+    tools:context=".activity.AddWishActivity">
+
+    <TextView
+        android:id="@+id/titleGrantWish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="57dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Grant which wish?"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <ListView
+        android:id="@+id/viewAllWishList"
+        android:layout_width="363dp"
+        android:layout_height="461dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="253dp"
+        />
+
+</RelativeLayout>

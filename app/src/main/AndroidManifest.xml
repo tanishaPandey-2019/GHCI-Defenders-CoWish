@@ -17,6 +17,7 @@
         <activity android:name=".activity.AddWishActivity" />
         <activity android:name=".activity.ChoiceActivity" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.GrantWishActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
