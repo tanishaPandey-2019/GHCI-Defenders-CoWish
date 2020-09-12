@@ -11,8 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ghci20.codeathon.cowish.R;
+import com.ghci20.codeathon.cowish.userlogin.SignInOperations;
+import com.ghci20.codeathon.cowish.userlogin.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -44,64 +49,38 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-//        addButton = (Button) findViewById(R.id.addButton);
-//        wishList = (ListView) findViewById(R.id.wishList);
-//        wish = (EditText) findViewById(R.id.wish);
-//
-//        stringArrayList = new ArrayList<>();
-//        for(int i=0; i<2; i++){
-//            stringArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, stringArrayList);
-//            wishList.setAdapter(stringArrayAdapter);
-//            addButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    stringArrayList.add(wish.getText().toString());
-//                    stringArrayAdapter.notifyDataSetChanged();
-//                }
-//            });
-//        }
-
-
-
-
-
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 openChoiceActivity();
-//                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                Log.i(TAG, "database = " + database.toString());
-//                DatabaseReference userRef =  database.getReference("Users");
-//                Log.i(TAG, "database = " + userRef.toString());
-//
-//                UserInfo myUser = new UserInfo("Ishita", 1111111111, 9999999, "Delhi", "Pass1");
-//                UserInfo myUser1 = new UserInfo("Mini", 14677, 4566, "NYC", "Pass2");
-//                UserInfo myUser2 = new UserInfo("Tanisha", 11167881, 765, "Amsterdam", "Pass3");
-//                UserInfo myUser3 = new UserInfo("SKP", 1234, 344, "Thailand", "Pass4");
-//                UserInfo myUser4 = new UserInfo("Flower", 56111111, 7789, "Garden", "Pass5");
-//                userRef.push().setValue(myUser);
-//                userRef.push().setValue(myUser1);
-//                userRef.push().setValue(myUser2);
-//                userRef.push().setValue(myUser3);
-//                userRef.push().setValue(myUser4);
-//
-//                Toast myToast = new Toast(MainActivity.this);
-//                myToast.cancel();
-//                boolean result = SignInOperations.isPasswordCorrect(Integer.parseInt(loginAadhaar.getText().toString()), loginPass.getText().toString());
-//                Log.i(TAG, "Result = " + result);
-//                if (result) {
-//                    myToast.makeText(MainActivity.this, "CORRECT PASSWORD", Toast.LENGTH_SHORT).show();
-//                    Log.i(TAG, "Correct password");
-//                } else {
-//                    myToast.makeText(MainActivity.this, "INCORRECT PASSWORD", Toast.LENGTH_SHORT).show();
-//                    Log.i(TAG, "Incorrect password");
-//                }
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                Log.i(TAG, "database = " + database.toString());
+                DatabaseReference userRef =  database.getReference("Users");
+                Log.i(TAG, "database = " + userRef.toString());
+
+                UserInfo myUser = new UserInfo("Ishita", 1111111111, 9999999, "Delhi", "Pass1");
+                UserInfo myUser1 = new UserInfo("Mini", 14677, 4566, "NYC", "Pass2");
+                UserInfo myUser2 = new UserInfo("Tanisha", 11167881, 765, "Amsterdam", "Pass3");
+                UserInfo myUser3 = new UserInfo("SKP", 1234, 344, "Thailand", "Pass4");
+                UserInfo myUser4 = new UserInfo("Flower", 56111111, 7789, "Garden", "Pass5");
+                userRef.push().setValue(myUser);
+                userRef.push().setValue(myUser1);
+                userRef.push().setValue(myUser2);
+                userRef.push().setValue(myUser3);
+                userRef.push().setValue(myUser4);
+
+                Toast myToast = new Toast(MainActivity.this);
+                myToast.cancel();
+                boolean result = SignInOperations.isPasswordCorrect(Integer.parseInt(loginAadhaar.getText().toString()), loginPass.getText().toString());
+                Log.i(TAG, "Result = " + result);
+                if (result) {
+                    myToast.makeText(MainActivity.this, "CORRECT PASSWORD", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "Correct password");
+                } else {
+                    myToast.makeText(MainActivity.this, "INCORRECT PASSWORD", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "Incorrect password");
+                }
 
 
 

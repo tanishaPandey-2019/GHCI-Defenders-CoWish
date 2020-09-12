@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1051021037894",
-    "firebase_url": "https://cowish.firebaseio.com",
-    "project_id": "cowish",
-    "storage_bucket": "cowish.appspot.com"
+    "project_number": "674059637457",
+    "firebase_url": "https://cowish-f0982.firebaseio.com",
+    "project_id": "cowish-f0982",
+    "storage_bucket": "cowish-f0982.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1051021037894:android:cfdfe02c119f01672c9547",
+        "mobilesdk_app_id": "1:674059637457:android:71ead2116d46688792ebf0",
         "android_client_info": {
           "package_name": "com.ghci20.codeathon.cowish"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1051021037894-ub719ujiua3sddgtkhj3gilniuon37nu.apps.googleusercontent.com",
+          "client_id": "674059637457-rs1bagg8k174bctgv47n4ggtuj3o8bis.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnGY6kIyQqljEpPZLhLsu5Y5warxSK_LI"
+          "current_key": "AIzaSyAzHNtDl_iPMRW-jdLRfSoXHC2Cko1f574"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1051021037894-ub719ujiua3sddgtkhj3gilniuon37nu.apps.googleusercontent.com",
+              "client_id": "674059637457-rs1bagg8k174bctgv47n4ggtuj3o8bis.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
