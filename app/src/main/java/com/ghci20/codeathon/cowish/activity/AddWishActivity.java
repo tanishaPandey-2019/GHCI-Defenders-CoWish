@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,11 +20,17 @@ import android.widget.Toast;
 
 import com.ghci20.codeathon.cowish.R;
 import com.ghci20.codeathon.cowish.WishesInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_WISHES;
@@ -106,15 +113,59 @@ public class AddWishActivity extends AppCompatActivity {
     }
 
     private void addWishToFireBase() {
-        int sharedPrefAadhaarNumber = getApplicationContext().getSharedPreferences("default", Context.MODE_PRIVATE)
+        final int sharedPrefAadhaarNumber = getApplicationContext().getSharedPreferences("default", Context.MODE_PRIVATE)
                 .getInt(SHARED_PREF_AADHAAR_NUMBER, 0);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
-        WishesInfo wishesInfo = new WishesInfo(sharedPrefAadhaarNumber, stringArrayList);
-        wishesRef.push().setValue(wishesInfo);
-        Log.i(TAG, "User inserted in Firebase successfully");
+        final DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
+;
+//        WishesInfo wishesInfo = new WishesInfo(sharedPrefAadhaarNumber, stringArrayList);
+//        wishesRef.push().setValue(wishesInfo);
+        Log.i(TAG, "Wishes inserted in Firebase successfully");
 
-//        DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
 
+        Query query = wishesRef
+                .orderByChild("aadhaarNumber")
+                .equalTo(sharedPrefAadhaarNumber);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() == null) {
+                        WishesInfo wishesInfo = new WishesInfo(sharedPrefAadhaarNumber, stringArrayList);
+                        wishesRef.push().setValue(wishesInfo);
+                        return;
+                    }
+
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        updateUser(wishesRef, dataSnapshot1.getKey(), sharedPrefAadhaarNumber);
+                    }
+
+            }
+
+        @Override
+        public void onCancelled(DatabaseError error) {
+            // Failed to read value
+            Log.e(TAG, "Encountered an error ", error.toException());
+        }
+    });
+    }
+
+    private void updateUser(DatabaseReference wishRef,String key, int aadhaarNumber) {
+        WishesInfo wishesInfo = new WishesInfo(aadhaarNumber, stringArrayList );
+
+//        HashMap map = new HashMap();
+//        map.put("aadhaarNumber", aadhaarNumber);
+//        map.put("wishes", stringArrayList);
+//        wishRef.updateChildren(map);
+
+        Map<String, Object> postUpdatedValues = wishesInfo.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/" + key, postUpdatedValues);
+        wishRef.updateChildren(childUpdates);
+
+
+////        Map<String, Object> postValues = user.toMap();
+////        Map<String, Object> childUpdates = new HashMap<>();
+//        childUpdates.put("/data/" + key, wishesInfo);
+//        wishRef.updateChildren(childUpdates);
     }
 }
