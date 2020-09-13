@@ -1,28 +1,36 @@
 package com.ghci20.codeathon.cowish.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ghci20.codeathon.cowish.R;
 import com.ghci20.codeathon.cowish.Util;
+import com.ghci20.codeathon.cowish.userlogin.SignInOperations;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.ghci20.codeathon.cowish.Util.getPasswordMatchedFromSharedPref;
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity" ;
+    private static final String TAG = "MainActivity";
     Button loginButton;
     EditText loginAadhaar;
     EditText loginPass;
     TextView askRegistration;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
         loginAadhaar = findViewById(R.id.LoginAadhar);
         loginPass = findViewById(R.id.loginPass);
         loginButton = findViewById(R.id.loginButton);
-        askRegistration = (TextView) findViewById(R.id.askRegisteration);
+        askRegistration = findViewById(R.id.askRegisteration);
+        progressBar = findViewById(R.id.progressBar);
 
         // Open regosteration page
         askRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(i);
             }
@@ -54,10 +63,9 @@ public class MainActivity extends AppCompatActivity {
                 Util.setAadhaarNumberToSharedPref(getApplicationContext(), loginAadhaar.getText().toString());
                 Util.getUserWishListUserFromFirebase(getApplicationContext());
                 Util.getAllWishListFromFirebase(getApplicationContext());
-                openChoiceActivity();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 Log.i(TAG, "database = " + database.toString());
-                DatabaseReference userRef =  database.getReference(FIREBASE_USERS);
+                DatabaseReference userRef = database.getReference(FIREBASE_USERS);
                 Log.i(TAG, "database = " + userRef.toString());
 
 //                UserInfo myUser = new UserInfo("Ishita", 1111111111, 9999999, "Delhi", "Pass1");
@@ -73,7 +81,30 @@ public class MainActivity extends AppCompatActivity {
 
 //                Toast myToast = new Toast(MainActivity.this);
 //                myToast.cancel();
-//                boolean result = SignInOperations.isPasswordCorrect(Integer.parseInt(loginAadhaar.getText().toString()), loginPass.getText().toString());
+
+//====================================================================================================================
+
+
+                SignInOperations.verifyPassword(getApplicationContext(), Integer.parseInt(loginAadhaar.getText().toString()), loginPass.getText().toString());
+//                progressBar.setVisibility(View.VISIBLE);
+                try{
+                    Thread.sleep(3000);                   // Wait for 3 Seconds
+                } catch (Exception e){
+                    System.out.println("Error: "+e);      // Catch the exception
+                }
+//                progressBar.setVisibility(View.INVISIBLE);
+//                if (getPasswordMatchedFromSharedPref(getApplicationContext())) {
+                    openChoiceActivity();
+//                } else {
+//                    new AlertDialog.Builder(MainActivity.this, R.style.Theme_AppCompat_DayNight_Dialog_Alert)
+//                            .setTitle("Incorrect username / password")
+//                            .setMessage("Please try again!")
+//                            .setCancelable(true)
+//                            .show();
+//                }
+//====================================================================================================================
+
+
 //                Log.i(TAG, "Result = " + result);
 //                if (result) {
 //                    myToast.makeText(MainActivity.this, "CORRECT PASSWORD", Toast.LENGTH_SHORT).show();
@@ -84,23 +115,17 @@ public class MainActivity extends AppCompatActivity {
 //                }
 
 
-
-
             }
 
         });
 
-        }
-
-
-
-    private void openChoiceActivity(){
-        Intent intent = new Intent(this, ChoiceActivity.class);
-        startActivity(intent);
     }
 
 
-
+    private void openChoiceActivity() {
+        Intent intent = new Intent(this, ChoiceActivity.class);
+        startActivity(intent);
+    }
 
 
 }

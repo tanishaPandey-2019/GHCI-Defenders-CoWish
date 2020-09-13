@@ -19,6 +19,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_WISHES;
 import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_AADHAAR_NUMBER;
 import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_ALL_WISHLIST;
+import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_PASSWORD_MATCHED;
 import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_WISHLIST;
 
 public class Util {
@@ -71,6 +72,19 @@ public class Util {
             return null;
         }
         return new ArrayList<String>(wishSet);
+    }
+
+    public static void setPasswordMatchedToSharedPref(Context context, Boolean isPasswordMatch) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(SHARED_PREF_PASSWORD_MATCHED, isPasswordMatch);
+        editor.apply();
+        Log.i(TAG, "Shared pref saved");
+    }
+
+    public static boolean getPasswordMatchedFromSharedPref(Context context) {
+        return context.getSharedPreferences("default", MODE_PRIVATE)
+                .getBoolean(SHARED_PREF_PASSWORD_MATCHED, false);
     }
 
     public static void getUserWishListUserFromFirebase(final Context context) {

@@ -63,6 +63,16 @@
         android:layout_marginTop="80dp"
         android:text="LOGIN" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:outlineSpotShadowColor="#ffffff"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        />
+
     <TextView
         android:id="@+id/askRegisteration"
         android:layout_width="wrap_content"
