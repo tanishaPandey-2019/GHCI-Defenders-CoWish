@@ -65,7 +65,7 @@ public class AddWishActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     wishList.add(wish.getText().toString());
                     stringArrayAdapter.notifyDataSetChanged();
-                    addWishToFireBase();
+                    addRemoveWishToFireBase();
                     wish.getText().clear();
                 }
             });
@@ -90,6 +90,7 @@ public class AddWishActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     wishList.remove(which_item);
+                                    addRemoveWishToFireBase();
                                     stringArrayAdapter.notifyDataSetChanged();
                                 }
                             })
@@ -101,7 +102,7 @@ public class AddWishActivity extends AppCompatActivity {
         }
     }
 
-    private void addWishToFireBase() {
+    private void addRemoveWishToFireBase() {
         final int sharedPrefAadhaarNumber = Util.getAadhaarNumberFromSharedPref(getApplicationContext());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference wishesRef = database.getReference(FIREBASE_WISHES);
