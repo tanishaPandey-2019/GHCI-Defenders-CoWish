@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_01"
+    android:background="@drawable/blue2"
     tools:context=".activity.AddWishActivity">
 
     <EditText
@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="47dp"
         android:layout_marginTop="134dp"
-        android:background="#660000"
+        android:background="#054973"
         android:ems="10"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="88dp"
@@ -35,6 +35,7 @@
         android:background="@drawable/button_modifications"
         android:text="+"
         android:textSize="45sp"
+        android:textColor="#ffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="207dp" />
@@ -46,8 +47,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="57dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="65dp"
         android:fontFamily="sans-serif-medium"
         android:text="What's your wish?"
         android:textColor="#ffffff"
@@ -57,13 +58,12 @@
 
     <ListView
         android:id="@+id/wishList"
-        android:layout_width="363dp"
-        android:layout_height="461dp"
+        android:layout_width="386dp"
+        android:layout_height="635dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="253dp"
-        />
+        android:layout_centerInParent="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="253dp" />
 
 </RelativeLayout>
