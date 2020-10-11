@@ -12,7 +12,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -60,7 +62,15 @@ public class Util {
     private static void setAllWishListToSharedPref(Context context, ArrayList<String> wishlist) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Set<String> wishSet = new HashSet<String>(wishlist);
+        Set<String> wishSet = new HashSet<String>();
+        List<String> modified = new ArrayList<String>();
+        for (String iterate : wishlist) {
+            iterate = iterate.substring(1, iterate.length()-2);
+            modified = Arrays.asList(iterate.split(","));
+            wishSet.addAll(modified);
+        }
+//        Set<String> wishSet = new HashSet<String>(modified);
+
         editor.putStringSet(SHARED_PREF_ALL_WISHLIST, wishSet);
         editor.apply();
     }

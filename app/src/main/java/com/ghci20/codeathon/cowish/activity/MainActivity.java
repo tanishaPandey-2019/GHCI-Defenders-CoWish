@@ -18,11 +18,13 @@ import android.widget.TextView;
 import com.ghci20.codeathon.cowish.R;
 import com.ghci20.codeathon.cowish.Util;
 import com.ghci20.codeathon.cowish.userlogin.SignInOperations;
+import com.ghci20.codeathon.cowish.userlogin.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static com.ghci20.codeathon.cowish.Util.getPasswordMatchedFromSharedPref;
 import static com.ghci20.codeathon.cowish.constants.FIREBASE_USERS;
+import static com.ghci20.codeathon.cowish.constants.SHARED_PREF_AADHAAR_NUMBER;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         askRegistration = findViewById(R.id.askRegisteration);
         progressBar = findViewById(R.id.progressBar);
 
-        // Open regosteration page
+        // Open registeration page
         askRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        // If already logged in then open choice page
+        if (this.getApplicationContext().getSharedPreferences("default", MODE_PRIVATE).contains(SHARED_PREF_AADHAAR_NUMBER) &&
+                Util.getAadhaarNumberFromSharedPref(this.getApplicationContext()) != 0) {
+            Intent i = new Intent(MainActivity.this, ChoiceActivity.class);
+            startActivity(i);
+            finish();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
