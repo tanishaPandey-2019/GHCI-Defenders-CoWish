@@ -84,6 +84,13 @@ public class Util {
         return new ArrayList<String>(wishSet);
     }
 
+    public static void removeAllWishListFromSharedPref(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(SHARED_PREF_ALL_WISHLIST);
+        editor.apply();
+    }
+
     public static void setPasswordMatchedToSharedPref(Context context, Boolean isPasswordMatch) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("default", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

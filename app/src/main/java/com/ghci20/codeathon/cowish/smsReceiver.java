@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
+import com.ghci20.codeathon.cowish.activity.GrantWishActivity;
 import com.ghci20.codeathon.cowish.activity.sms;
 
 
@@ -32,7 +33,10 @@ public class smsReceiver extends BroadcastReceiver{
             Toast.makeText(context, smsMessageStr, Toast.LENGTH_SHORT).show();
 
 
-            sms inst = com.ghci20.codeathon.cowish.activity.sms.instance();
+//            sms inst = com.ghci20.codeathon.cowish.activity.sms.instance();
+//            inst.updateList(smsMessageStr);
+
+            GrantWishActivity inst = com.ghci20.codeathon.cowish.activity.GrantWishActivity.instance();
             inst.updateList(smsMessageStr);
         }
     }

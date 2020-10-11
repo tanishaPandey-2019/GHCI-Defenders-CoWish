@@ -131,6 +131,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (this.getApplicationContext().getSharedPreferences("default", MODE_PRIVATE).contains(SHARED_PREF_AADHAAR_NUMBER) &&
+                Util.getAadhaarNumberFromSharedPref(this.getApplicationContext()) != 0) {
+            Util.removeAllWishListFromSharedPref(getApplicationContext());
+            Util.getAllWishListFromFirebase(getApplicationContext());
+        }
+    }
 
     private void openChoiceActivity() {
         Intent intent = new Intent(this, ChoiceActivity.class);

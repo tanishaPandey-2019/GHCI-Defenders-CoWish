@@ -1,7 +1,12 @@
 package com.ghci20.codeathon.cowish.activity;
 
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.ghci20.codeathon.cowish.R;
 import com.ghci20.codeathon.cowish.Util;
@@ -35,6 +42,11 @@ public class GrantWishActivity extends AppCompatActivity {
     ListView allWishListView;
     ArrayList<String> allWishList;
     ArrayAdapter<String> stringArrayAdapter;
+    private static GrantWishActivity inst;
+    ArrayList<String> smsMessageList = new ArrayList<String>();
+//    ArrayAdapter arrayAdapter;
+public static GrantWishActivity instance() { return inst; }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +67,11 @@ public class GrantWishActivity extends AppCompatActivity {
             allWishListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), "You clicked item name :" + stringArrayAdapter.getItem(position), Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(GrantWishActivity.this)
+                            .setIcon(android.R.drawable.sym_action_call)
+                            .setTitle("User details")
+                            .setMessage("User : John\nMobile : 9999999999\nLocation : Mumbai")
+                            .show();
                 }
             });
 
@@ -80,6 +96,38 @@ public class GrantWishActivity extends AppCompatActivity {
                 }
             });
         }
+
+        handleSMSWishes();
+    }
+
+    private void handleSMSWishes() {
+        if(ContextCompat.checkSelfPermission(getBaseContext(), "android.permission.READ_SMS") == PackageManager.PERMISSION_GRANTED) {
+            refreshSmsInbox();
+        }
+
+        else {
+            // Todo : Then Set Permission
+            final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+            ActivityCompat.requestPermissions(GrantWishActivity.this, new String[]{"android.permission.READ_SMS"}, REQUEST_CODE_ASK_PERMISSIONS);
+        }
+    }
+
+    public void refreshSmsInbox() {
+        ContentResolver contentResolver = getContentResolver();
+        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null, null, null, null);
+        int indexBody = smsInboxCursor.getColumnIndex("body");
+        int indexAddress = smsInboxCursor.getColumnIndex("address");
+        if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;
+//        stringArrayAdapter.clear();
+        do {
+            String str = smsInboxCursor.getString(indexBody) + "\n";
+            stringArrayAdapter.add(str);
+        } while (smsInboxCursor.moveToNext());
+    }
+
+    public void updateList(final String smsMessage) {
+        stringArrayAdapter.insert(smsMessage, 0);
+        stringArrayAdapter.notifyDataSetChanged();
     }
 
 }

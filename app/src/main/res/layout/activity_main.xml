@@ -27,6 +27,7 @@
     <EditText
         android:id="@+id/LoginAadhar"
         android:hint="Aadhaar number"
+        android:maxLength="12"
         android:textColorHint="#ffffff"
         android:drawableLeft="@drawable/ic_action_name"
         android:textColor="#ffffff"
